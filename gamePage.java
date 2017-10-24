@@ -25,13 +25,29 @@ public class gamePage extends Application
    @Override 
    public void start(Stage stage) 
    {    
+      VBox vBox = new VBox();
+      vBox.setAlignment(Pos.CENTER);
+
+      HBox hBox = new HBox();
+      hBox.setAlignment(Pos.TOP_RIGHT);
+      hBox.setSpacing(10);
+      hBox.setPadding(new Insets(10, 10, 10, 10));
+
+      Button settingsBut = new Button("SETTINGS");
+      Button undoBut = new Button("UNDO");
+      ChoiceBox cBox = new ChoiceBox();
+      cBox.getItems().addAll("START NEW", "EXIT TO HOME PAGE");
+      cBox.getSelectionModel().select(0);
+         
+
+      hBox.getChildren().addAll(settingsBut, undoBut, cBox);
       
       GridPane grid = new GridPane();
       grid.setPadding(new Insets(10, 10, 10, 10));
       grid.setAlignment(Pos.CENTER);
       grid.setBorder(new Border(new BorderStroke(Color.GRAY, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(1))));
 
-
+      vBox.getChildren().addAll(hBox, grid);
 
       int row = 6;
       int column = 9;
@@ -110,7 +126,7 @@ public class gamePage extends Application
          }
       }
 
-      Scene scene = new Scene(grid);  
+      Scene scene = new Scene(vBox);  
       
       stage.setTitle("Chain Reaction"); 
        
