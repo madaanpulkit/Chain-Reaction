@@ -3,18 +3,15 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Orientation; 
 import javafx.geometry.Pos; 
 import javafx.scene.Scene; 
-import javafx.scene.control.Button; 
-import javafx.scene.layout.HBox; 
-import javafx.scene.layout.VBox;
+import javafx.scene.control.*; 
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
-import javafx.scene.control.Label;
 import javafx.scene.text.Font;
-import javafx.scene.control.ChoiceBox;
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
-import javafx.scene.control.ToggleButton;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
+import javafx.event.*;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.*;
 
 public class homePage extends Application 
 { 
@@ -67,8 +64,8 @@ public class homePage extends Application
       Button resumeBut = new Button("RESUME");
       hBox1.getChildren().add(resumeBut);
 
-      Button newGaneBut = new Button("NEW GAME");
-      hBox1.getChildren().add(newGaneBut);
+      Button newGameBut = new Button("NEW GAME");
+      hBox1.getChildren().add(newGameBut);
 
       vBox1.getChildren().add(hBox1);
 
@@ -80,6 +77,7 @@ public class homePage extends Application
       hBox2.getChildren().add(toggleSound);
 
       Button settingsBut = new Button("SETTINGS");
+      settingsBut.setOnAction(e -> new settingsPage().openSettings(stage));
       hBox2.getChildren().add(settingsBut);
 
       vBox1.getChildren().add(hBox2);
@@ -90,7 +88,26 @@ public class homePage extends Application
        
       stage.setScene(scene); 
       
-      stage.show(); 
+      stage.show();
+
+      EventHandler<MouseEvent> gameHandler = new EventHandler<MouseEvent>(){
+         @Override
+         public void handle(MouseEvent e)
+         {
+            if(gridOption1.isSelected())
+            {
+               new gamePage().openGame(stage, new Dimension(9, 6));   
+            }
+
+            else
+            {
+               new gamePage().openGame(stage, new Dimension(15, 10));
+            }
+            
+         }
+      };
+
+      newGameBut.addEventFilter(MouseEvent.MOUSE_CLICKED, gameHandler);
    } 
 
    public static void main(String args[])
