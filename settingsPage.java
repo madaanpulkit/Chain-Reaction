@@ -3,24 +3,19 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Orientation; 
 import javafx.geometry.Pos; 
 import javafx.scene.Scene; 
-import javafx.scene.control.Button; 
-import javafx.scene.layout.HBox; 
-import javafx.scene.layout.VBox;
+import javafx.scene.control.*; 
+import javafx.scene.layout.*; 
 import javafx.stage.Stage;
-import javafx.scene.control.Label;
 import javafx.scene.text.Font;
 import javafx.scene.control.ChoiceBox;
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
-import javafx.scene.control.ToggleButton;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.ToggleGroup;
+import javafx.event.*;
+import javafx.scene.input.MouseEvent;
 
-public class settingsPage extends Application 
-{ 
-   @Override 
-   public void start(Stage stage) 
-   {    
+class settingsPage
+{
+   public void openSettings(Stage stage)
+   {
       VBox vBox1 = new VBox();
       vBox1.setSpacing(20);
       vBox1.setPadding(new Insets(20, 20, 20, 20));
@@ -58,13 +53,16 @@ public class settingsPage extends Application
       
       stage.setTitle("Chain Reaction"); 
          
-      stage.setScene(scene); 
-         
-      stage.show(); 
-   } 
+      stage.setScene(scene);
 
-   public static void main(String args[])
-   { 
-      launch(args); 
-   } 
+      EventHandler<MouseEvent> backHandler = new EventHandler<MouseEvent>(){ 
+            @Override 
+            public void handle(MouseEvent e) {
+                 
+              new homePage().start(stage);
+            } 
+         };
+
+      backBut.addEventFilter(MouseEvent.MOUSE_CLICKED, backHandler);
+   }
 }
