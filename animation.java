@@ -10,17 +10,13 @@ import javafx.scene.control.Label;
 import javafx.scene.text.Font;
 import javafx.scene.control.ChoiceBox;
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
-import javafx.scene.control.ToggleButton;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.ToggleGroup;
-import javafx.animation.Timeline;
-import javafx.animation.TranslateTransition; 
+import javafx.scene.control.*;
 import javafx.scene.shape.*;
 import javafx.util.Duration;
-import javafx.animation.Interpolator;
-import javafx.animation.PathTransition;
+import javafx.animation.*;
 import javafx.scene.shape.Ellipse;
+import javafx.scene.input.MouseEvent;
+import javafx.event.*;
 
 
 public class animation extends Application 
@@ -235,14 +231,49 @@ public class animation extends Application
       transition36.setInterpolator(Interpolator.LINEAR);   
       transition36.play();
 
-
-
-
       hBox.getChildren().add(vBox3);
 
+      VBox vBox4 = new VBox();
+      vBox4.setPadding(new Insets(30, 30, 30, 30));
+      vBox4.setSpacing(50);
+
+      StackPane exPane1 = new StackPane();
+
+      Sphere exSphere1 = new Sphere(50);
+
+      TranslateTransition extranslateTransition1 = new TranslateTransition(); 
+       
+      extranslateTransition1.setNode(exSphere1); 
+      extranslateTransition1.setByX(2.5); 
+      extranslateTransition1.setDuration(Duration.millis(50));
+      extranslateTransition1.setCycleCount(Timeline.INDEFINITE); 
+      extranslateTransition1.setAutoReverse(true);
+      extranslateTransition1.setInterpolator(Interpolator.LINEAR); 
+      extranslateTransition1.play();
+
+      exPane1.getChildren().add(exSphere1);
+
+      vBox4.getChildren().add(exPane1);
+      
+
+      hBox.getChildren().add(vBox4);
+
+      EventHandler<MouseEvent> Exhandler = new EventHandler<MouseEvent>(){
+            @Override 
+            public void handle(MouseEvent e) 
+            {
+                  explode(exPane1);
+            }  
+      };
 
 
+      exPane1.addEventFilter(MouseEvent.MOUSE_CLICKED, Exhandler);
 
+      VBox vBox5 = new VBox();
+      vBox5.setPadding(new Insets(30, 100, 30, 30));
+      vBox5.setSpacing(50);
+
+      hBox.getChildren().add(vBox5);
 
       Scene scene = new Scene(hBox);  
       
@@ -256,5 +287,38 @@ public class animation extends Application
    public static void main(String args[])
    { 
       launch(args); 
+   }
+
+   void explode(StackPane pane)
+   {
+      pane.getChildren().clear();
+      Sphere sphere1 = new Sphere(50);
+      Sphere sphere2 = new Sphere(50);
+      pane.getChildren().add(sphere1);
+      pane.getChildren().add(sphere2);
+
+      TranslateTransition translateTransition1 = new TranslateTransition(); 
+       
+      translateTransition1.setNode(sphere1); 
+      translateTransition1.setByX(150); 
+      translateTransition1.setDuration(Duration.millis(200));
+      translateTransition1.setCycleCount(1); 
+      translateTransition1.setAutoReverse(false);
+      translateTransition1.setInterpolator(Interpolator.LINEAR); 
+      translateTransition1.play();
+
+      TranslateTransition translateTransition2 = new TranslateTransition(); 
+       
+      translateTransition2.setNode(sphere2); 
+      translateTransition2.setByY(150); 
+      translateTransition2.setDuration(Duration.millis(200));
+      translateTransition2.setCycleCount(1); 
+      translateTransition2.setAutoReverse(false);
+      translateTransition2.setInterpolator(Interpolator.LINEAR); 
+      translateTransition2.play();
+
+      PauseTransition delay = new PauseTransition(Duration.millis(200));
+      delay.setOnFinished( e -> pane.getChildren().clear() );
+      delay.play();
    } 
 }
