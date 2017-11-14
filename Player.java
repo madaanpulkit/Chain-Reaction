@@ -11,44 +11,61 @@ class Player
 {
 	private Color pColor;
 	private String name;
-	private Sound sfx;
+	// private Sound sfx;
 
-	public Player(Color c , Sound s)
+	public Player(String n, Color c)
 	{
-		this.pColor=c;
-		this.sfx = s;
+		this.pColor = c;
+		this.name = n;
+		// this.sfx = s;
 		
 	}
-	public Player(Color c , Sound s , String n)
+	/*public Player(Color c , String n)
 	{
 		this.pColor=c;
-		this.sfx = s;
+		// this.sfx = s;
 		this.name = n;
-	}
+	}*/
 
 	public Color getColor()
 	{
 		return this.pColor;
 	}
-	public Sound getSound()
+	
+	/*public Sound getSound()
 	{
 		return this.sfx;
-	}
+	}*/
+	
 	public String getName()
 	{
 		return this.name;
 	}
+	
 	public void setColor(Color c)
 	{
 		this.pColor=c;
 	}
-	public void setName(String n)
+	
+	/*public void setName(String n)
 	{
 		this.name = n;
-	}
-	public void setSound(Sound s)
+	}*/
+	
+	/*public void setSound(Sound s)
 	{
 		this.sfx = s;
+	}*/
+
+	@Override
+	public String toString()
+	{
+		return name + " " + pColor.toString();
+	}
+
+	public boolean equals(Player p)
+	{
+		return this.getName().equals(p.getName());
 	}
 
 }

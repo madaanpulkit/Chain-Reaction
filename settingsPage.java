@@ -11,9 +11,37 @@ import javafx.scene.control.ChoiceBox;
 import javafx.geometry.Insets;
 import javafx.event.*;
 import javafx.scene.input.MouseEvent;
+import java.io.*;
+import java.util.*;
+import javafx.scene.paint.*;
 
 class settingsPage
 {
+   private ArrayList<Player> playerList;
+   private ArrayList<Color> colorList;
+
+   settingsPage()
+   {
+      playerList = new ArrayList<Player>();
+      colorList = new ArrayList<Color>(Arrays.asList(Color.RED, Color.YELLOW, Color.GREEN, Color.BLUE, Color.BROWN, Color.WHITE, Color.GREY, Color.PINK));
+
+      for(int i=0; i<8; i++)
+      {
+         playerList.add(new Player("Player " + Integer.toString(i+1), colorList.get(i)));
+      }
+
+      for(int i=0; i<playerList.size(); i++)
+      {
+         System.out.println("Settings " + playerList.get(i));
+      }
+   }
+
+   public Player getPlayer(int i)
+   {
+      return playerList.get(i);
+   }
+
+
    public void openSettings(Stage stage)
    {
       VBox vBox1 = new VBox();
@@ -22,7 +50,7 @@ class settingsPage
       vBox1.setAlignment(Pos.CENTER);
 
       Label headLabel = new Label("SETTINGS");
-      headLabel.setFont(new Font((double) 50.0));
+      headLabel.setFont(new Font(50.0));
       vBox1.getChildren().add(headLabel);
 
       HBox[] hBox = new HBox[8];
