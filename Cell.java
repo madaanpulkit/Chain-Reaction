@@ -24,7 +24,7 @@ import javafx.scene.transform.*;
 import java.io.*;
 import java.util.*;
 
-class Cell
+public class Cell
 {
 	private StackPane sPane;
 	private Box cube;
@@ -36,6 +36,12 @@ class Cell
 	private Player curPlayer;
 	private PhongMaterial material;
 
+	/**
+     * Constructs the Cell with given critical mass and color
+     *
+     * @param      c critical mass of the cell to be set up
+     * @param      col Color of the cell to be set up
+     */
 	public Cell(int c, Color col)
 	{
 		sPane = new StackPane();
@@ -51,32 +57,43 @@ class Cell
 		curPlayer = null;
 		sPane.getChildren().add(orbPane);
 	}
-
+	/**
+     * Setup the Cube
+     */
 	private void setCube()
 	{
         cube.setDrawMode(DrawMode.LINE);
         sPane.getChildren().add(cube);
 	}
-
+	/**
+     * Setup the Pane
+     */
 	private void setPane()
 	{
 		sPane.setPrefWidth(50);
 		sPane.setPrefHeight(50);
 		sPane.setAlignment(Pos.CENTER);
 	}
-
+	/**
+     * Setup the Rectangle
+     */
 	private void setRect()
 	{
 		rect.setFill(Color.WHITE);
 		sPane.getChildren().add(rect);
 	}
-
+	/**
+     * Setup the Rotation of the cube
+     */
 	private void setRotate()
 	{
 		cube.getTransforms().add(new Rotate(-10, 0, 0, 0, Rotate.Y_AXIS));
 		cube.getTransforms().add(new Rotate(10, 0, 0, 0, Rotate.X_AXIS));
 	}
-
+	/**
+     * Sets up the Cell color
+     * @param      c Color of the cell to be set up
+     */
 	public void setCellColor(Color c)
 	{
 		material.setDiffuseColor(c);
@@ -84,37 +101,65 @@ class Cell
 		cube.setMaterial(material);
 	}
 
+	/**
+     * returns the critical mass of the current cell
+     * @return     critical mass of the current cell
+     */
 	public int getCMass()
 	{
 		return cMass;
 	}
 
+	/**
+     * returns the present mass of the current cell
+     * @return     present mass of the current cell
+     */
 	public int getPMass()
 	{
 		return pMass;
 	}
 
+	/**
+     * Sets up the present mass of the current cell
+     * @param      p present mass of the current cel
+     */
 	public void setPMass(int p)
 	{
 		pMass = p;
 	}
 
+	/**
+     * returns the stackPane of the current cell
+     * @return     the stackPane of the current cell
+     */
 	public StackPane getPane()
 	{
 		return sPane;
 	}
 
+	/**
+     * returns the Player of the current cell
+     * @return     the Player of the current cell
+     */
 	public Player getCurPlayer()
 	{
 		return curPlayer;
 	}
 
+	/**
+     * Sets up the Player of the current cell
+     * Assigns the current cell to a player
+     * @param      p Player of the current cel
+     */
 	public void setCurPlayer(Player p)
 	{
 		curPlayer = p;
-		// setOrbColor(p.getColor());
 	}
 
+	/**
+     * returns the orbPane of the current cell
+     * @return     the orbPane of the current cell
+     */
 	public StackPane getOrbPane()
 	{
 		return orbPane;
