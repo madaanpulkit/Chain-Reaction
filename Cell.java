@@ -24,17 +24,16 @@ import javafx.scene.transform.*;
 import java.io.*;
 import java.util.*;
 
-public class Cell
+public class Cell implements Serializable
 {
-	private StackPane sPane;
-	private Box cube;
-	private Rectangle rect;
+	private transient StackPane sPane;
+	private transient Box cube;
+	private transient Rectangle rect;
 	private final int cMass;
 	private int pMass;
-	// private ArrayList<Orbs> orb;
-	private StackPane orbPane;
+	private transient StackPane orbPane;
 	private Player curPlayer;
-	private PhongMaterial material;
+	private transient PhongMaterial material;
 
 	/**
      * Constructs the Cell with given critical mass and color
@@ -45,6 +44,7 @@ public class Cell
 	public Cell(int c, Color col)
 	{
 		sPane = new StackPane();
+		orbPane = new StackPane();
 		cube = new Box(50, 50, 50);
 		rect = new Rectangle(38,38);
 		cMass=c;
@@ -56,6 +56,12 @@ public class Cell
 		this.setRect();
 		curPlayer = null;
 		sPane.getChildren().add(orbPane);
+	}
+	//
+	public Cell(int cMass, int pMass)
+	{
+		this.cMass = cMass;
+		this.pMass = pMass;
 	}
 	/**
      * Setup the Cube

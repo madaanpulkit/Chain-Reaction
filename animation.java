@@ -17,308 +17,398 @@ import javafx.animation.*;
 import javafx.scene.shape.Ellipse;
 import javafx.scene.input.MouseEvent;
 import javafx.event.*;
+import javafx.scene.paint.*;
+import java.util.concurrent.TimeUnit;
+import java.util.*;
+import java.io.*;
 
 
-public class animation extends Application 
+public class animation
 { 
-   @Override 
-   public void start(Stage stage) 
+   public void add(Color color, StackPane pane, int cMass, int pMass, int i, int j) 
    {    
-      HBox hBox = new HBox();
-      hBox.setSpacing(20);
+      // StackPane pane = cell.getOrbPane();
+      pane.getChildren().clear();
+      PhongMaterial material = new PhongMaterial();
+      material.setDiffuseColor(color);
+      material.setSpecularColor(color);
 
-      VBox vBox1 = new VBox();
-      vBox1.setPadding(new Insets(30, 30, 30, 30));
+      if(cMass == 1 && pMass == 1)
+      {
+         Sphere sphere = new Sphere(12.5);
+         sphere.setMaterial(material);
 
-      Sphere sphere11 = new Sphere(50);
+         TranslateTransition vibrate = new TranslateTransition(); 
+          
+         pane.getChildren().add(sphere);
 
-      TranslateTransition translateTransition11 = new TranslateTransition(); 
-       
-      translateTransition11.setNode(sphere11); 
-      translateTransition11.setByX(2.5); 
-      translateTransition11.setDuration(Duration.millis(50));
-      translateTransition11.setCycleCount(Timeline.INDEFINITE); 
-      translateTransition11.setAutoReverse(true);
-      translateTransition11.setInterpolator(Interpolator.LINEAR); 
-      translateTransition11.play();
-      vBox1.getChildren().add(sphere11);
+         vibrate.setNode(sphere); 
+         vibrate.setByX(2.5); 
+         vibrate.setDuration(Duration.millis(50));
+         vibrate.setCycleCount(Timeline.INDEFINITE); 
+         vibrate.setAutoReverse(true);
+         vibrate.setInterpolator(Interpolator.LINEAR); 
+         vibrate.play();
+      }      
 
-      hBox.getChildren().add(vBox1);
+      else if(cMass == 2)
+      {
+         if(pMass == 1)
+         {
+            Sphere sphere = new Sphere(12.5);
+            sphere.setMaterial(material);
 
-      VBox vBox2 = new VBox();
-      vBox2.setPadding(new Insets(30, 30, 30, 30));
-      vBox2.setSpacing(50);
-
-      Sphere sphere21 = new Sphere(50);
-
-      TranslateTransition translateTransition21 = new TranslateTransition(); 
-       
-      translateTransition21.setNode(sphere21);       
-      translateTransition21.setByX(5); 
-      translateTransition21.setDuration(Duration.seconds(1));
-      translateTransition21.setCycleCount(Timeline.INDEFINITE); 
-      translateTransition21.setAutoReverse(true); 
-      translateTransition21.setInterpolator(Interpolator.LINEAR); 
-      translateTransition21.play();
-      vBox2.getChildren().add(sphere21);
-
-      Sphere sphere22 = new Sphere(40);
-
-      StackPane stack22 = new StackPane();
-      stack22.getChildren().add(sphere22);
-
-      vBox2.getChildren().addAll(stack22);
-      
-      Circle circle22 = new Circle(5);
- 
-      PathTransition transition22 = new PathTransition();
-      
-      transition22.setNode(sphere22);
-      transition22.setPath(circle22);
-      
-      transition22.setDuration(Duration.seconds(0.3));
-      
-      transition22.setCycleCount(Timeline.INDEFINITE);
-      
-      transition22.setInterpolator(Interpolator.LINEAR);
-      transition22.play();
- 
-        
-      Sphere sphere23 = new Sphere(40); 
-
-      stack22.getChildren().add(sphere23); 
-
-      Circle circle23 = new Circle(10);
-
-      circle23.setCenterX(20);
-      circle23.setCenterY(-25);
+            TranslateTransition vibrate = new TranslateTransition(); 
             
-      PathTransition transition23 = new PathTransition();
-      
-      transition23.setNode(sphere23);
-      transition23.setPath(circle23);
-      
-      transition23.setDuration(Duration.seconds(0.3));
-        
-      transition23.setCycleCount(Timeline.INDEFINITE);
-      
-      transition23.setInterpolator(Interpolator.LINEAR);   
-      transition23.play();
+            pane.getChildren().add(sphere); 
 
-      hBox.getChildren().add(vBox2);
+            vibrate.setNode(sphere);       
+            vibrate.setByX(5); 
+            vibrate.setDuration(Duration.seconds(1));
+            vibrate.setCycleCount(Timeline.INDEFINITE); 
+            vibrate.setAutoReverse(true); 
+            vibrate.setInterpolator(Interpolator.LINEAR); 
+            vibrate.play();
+         }
 
-      VBox vBox3 = new VBox();
-      vBox3.setPadding(new Insets(30, 30, 30, 30));
-      vBox3.setSpacing(50);
-
-      Sphere sphere31 = new Sphere(50);
-
-      TranslateTransition translateTransition31 = new TranslateTransition(); 
+         else
+         {
+            Sphere sphere1 = new Sphere(12.5);
+            sphere1.setMaterial(material);
+            
+            Circle circle1 = new Circle(1.5);
        
-      translateTransition31.setNode(sphere31);       
-      translateTransition31.setByX(5); 
-      translateTransition31.setDuration(Duration.seconds(1.2));
-      translateTransition31.setCycleCount(Timeline.INDEFINITE); 
-      translateTransition31.setAutoReverse(true); 
-      translateTransition31.setInterpolator(Interpolator.LINEAR); 
-      translateTransition31.play();
-      vBox3.getChildren().add(sphere31);
-
-      Sphere sphere32 = new Sphere(40);
-
-      StackPane stack32 = new StackPane();
-      stack32.getChildren().add(sphere32);
-
-      vBox3.getChildren().addAll(stack32);
-      
-      Circle circle32 = new Circle(3.5);
- 
-      PathTransition transition32 = new PathTransition();
-      
-      transition32.setNode(sphere32);
-      transition32.setPath(circle32);
-      
-      transition32.setDuration(Duration.seconds(1.2));
-      
-      transition32.setCycleCount(Timeline.INDEFINITE);
-      
-      transition32.setInterpolator(Interpolator.LINEAR);
-      transition32.play();
- 
-        
-      Sphere sphere33 = new Sphere(40); 
-
-      stack32.getChildren().add(sphere33); 
-
-      Circle circle33 = new Circle(7.5);
-
-      circle33.setCenterX(20);
-      circle33.setCenterY(-25);
+            PathTransition rotate1 = new PathTransition();
             
-      PathTransition transition33 = new PathTransition();
-      
-      transition33.setNode(sphere33);
-      transition33.setPath(circle33);
-      
-      transition33.setDuration(Duration.seconds(1.2));
-        
-      transition33.setCycleCount(Timeline.INDEFINITE);
-      
-      transition33.setInterpolator(Interpolator.LINEAR);   
-      transition33.play();
+            pane.getChildren().add(sphere1);            
 
-      Sphere sphere34 = new Sphere(40);
+            rotate1.setNode(sphere1);
+            rotate1.setPath(circle1);
+            rotate1.setDuration(Duration.seconds(0.3));
+            rotate1.setCycleCount(Timeline.INDEFINITE);
+            rotate1.setInterpolator(Interpolator.LINEAR);
+            rotate1.play();
 
-      StackPane stack33 = new StackPane();
-      stack33.getChildren().add(sphere34);
+            Sphere sphere2 = new Sphere(12.5);
+            sphere2.setMaterial(material); 
 
-      vBox3.getChildren().addAll(stack33);
-      
-      Circle circle34 = new Circle(4);
- 
-      PathTransition transition34 = new PathTransition();
-      
-      transition34.setNode(sphere34);
-      transition34.setPath(circle34);
-      
-      transition34.setDuration(Duration.seconds(0.3));
-      
-      transition34.setCycleCount(Timeline.INDEFINITE);
-      
-      transition34.setInterpolator(Interpolator.LINEAR);
-      transition34.play();
- 
-        
-      Sphere sphere35 = new Sphere(40); 
-
-      stack33.getChildren().add(sphere35); 
-
-      Circle circle35 = new Circle(9);
-
-      circle35.setCenterX(5);
-      circle35.setCenterY(-20);
+            Circle circle2 = new Circle(3);
+            circle2.setCenterX(6.25);
+            circle2.setCenterY(-6.5);
+                  
+            PathTransition rotate2 = new PathTransition();
             
-      PathTransition transition35 = new PathTransition();
-      
-      transition35.setNode(sphere35);
-      transition35.setPath(circle35);
-      
-      transition35.setDuration(Duration.seconds(0.3));
-        
-      transition35.setCycleCount(Timeline.INDEFINITE);
-      
-      transition35.setInterpolator(Interpolator.LINEAR);   
-      transition35.play();
+            pane.getChildren().add(sphere2);
 
-      Sphere sphere36 = new Sphere(40); 
-
-      stack33.getChildren().add(sphere36); 
-
-      Circle circle36 = new Circle(11.5);
-
-      circle36.setCenterX(-15);
-      circle36.setCenterY(-25.5);
-            
-      PathTransition transition36 = new PathTransition();
-      
-      transition36.setNode(sphere36);
-      transition36.setPath(circle36);
-      
-      transition36.setDuration(Duration.seconds(0.3));
-        
-      transition36.setCycleCount(Timeline.INDEFINITE);
-      
-      transition36.setInterpolator(Interpolator.LINEAR);   
-      transition36.play();
-
-      hBox.getChildren().add(vBox3);
-
-      VBox vBox4 = new VBox();
-      vBox4.setPadding(new Insets(30, 30, 30, 30));
-      vBox4.setSpacing(50);
-
-      StackPane exPane1 = new StackPane();
-
-      Sphere exSphere1 = new Sphere(50);
-
-      TranslateTransition extranslateTransition1 = new TranslateTransition(); 
-       
-      extranslateTransition1.setNode(exSphere1); 
-      extranslateTransition1.setByX(2.5); 
-      extranslateTransition1.setDuration(Duration.millis(50));
-      extranslateTransition1.setCycleCount(Timeline.INDEFINITE); 
-      extranslateTransition1.setAutoReverse(true);
-      extranslateTransition1.setInterpolator(Interpolator.LINEAR); 
-      extranslateTransition1.play();
-
-      exPane1.getChildren().add(exSphere1);
-
-      vBox4.getChildren().add(exPane1);
-      
-
-      hBox.getChildren().add(vBox4);
-
-      EventHandler<MouseEvent> Exhandler = new EventHandler<MouseEvent>(){
-            @Override 
-            public void handle(MouseEvent e) 
-            {
-                  explode(exPane1);
-            }  
-      };
-
-
-      exPane1.addEventFilter(MouseEvent.MOUSE_CLICKED, Exhandler);
-
-      VBox vBox5 = new VBox();
-      vBox5.setPadding(new Insets(30, 100, 30, 30));
-      vBox5.setSpacing(50);
-
-      hBox.getChildren().add(vBox5);
-
-      Scene scene = new Scene(hBox);  
-      
-      stage.setTitle("Chain Reaction"); 
+            rotate2.setNode(sphere2);
+            rotate2.setPath(circle2);
+            rotate2.setDuration(Duration.seconds(0.3));
+            rotate2.setCycleCount(Timeline.INDEFINITE);
+            rotate2.setInterpolator(Interpolator.LINEAR);   
+            rotate2.play();
+         }      
+      }
          
-      stage.setScene(scene); 
-         
-      stage.show(); 
+      else
+      {
+         if(pMass == 1)
+         {
+            Sphere sphere = new Sphere(12.5);
+            sphere.setMaterial(material);
+
+            TranslateTransition vibrate = new TranslateTransition(); 
+            
+            pane.getChildren().add(sphere);
+
+            vibrate.setNode(sphere);       
+            vibrate.setByX(5); 
+            vibrate.setDuration(Duration.seconds(1.2));
+            vibrate.setCycleCount(Timeline.INDEFINITE); 
+            vibrate.setAutoReverse(true); 
+            vibrate.setInterpolator(Interpolator.LINEAR); 
+            vibrate.play();
+         }
+
+         else if(pMass == 2)
+         {
+            Sphere sphere1 = new Sphere(12.5);
+            sphere1.setMaterial(material);
+            
+            Circle circle1 = new Circle(1);
+       
+            PathTransition rotate1 = new PathTransition();
+
+            pane.getChildren().add(sphere1);
+            
+            rotate1.setNode(sphere1);
+            rotate1.setPath(circle1);       
+            rotate1.setDuration(Duration.seconds(1.2));       
+            rotate1.setCycleCount(Timeline.INDEFINITE);
+            rotate1.setInterpolator(Interpolator.LINEAR);
+            rotate1.play();
+        
+            Sphere sphere2 = new Sphere(12.5); 
+            sphere2.setMaterial(material);
+
+            Circle circle2 = new Circle(2.5);
+            circle2.setCenterX(6.25);
+            circle2.setCenterY(-6.5);
+                  
+            PathTransition rotate2 = new PathTransition();
+
+            pane.getChildren().add(sphere2); 
+            
+            rotate2.setNode(sphere2);
+            rotate2.setPath(circle2);
+            rotate2.setDuration(Duration.seconds(1.2));  
+            rotate2.setCycleCount(Timeline.INDEFINITE);
+            rotate2.setInterpolator(Interpolator.LINEAR);   
+            rotate2.play();
+         }
+
+         else
+         {
+            Sphere sphere1 = new Sphere(12.5);
+            sphere1.setMaterial(material);
+            
+            Circle circle1 = new Circle(1.25);
+       
+            PathTransition rotate1 = new PathTransition();
+
+            pane.getChildren().add(sphere1);
+            
+            rotate1.setNode(sphere1);
+            rotate1.setPath(circle1);
+            rotate1.setDuration(Duration.seconds(0.3));
+            rotate1.setCycleCount(Timeline.INDEFINITE);
+            rotate1.setInterpolator(Interpolator.LINEAR);
+            rotate1.play();
+       
+            Sphere sphere2 = new Sphere(12.5); 
+            sphere2.setMaterial(material);
+
+            Circle circle2 = new Circle(2.8);
+            circle2.setCenterX(1.56);
+            circle2.setCenterY(-6.25);
+                  
+            PathTransition rotate2 = new PathTransition();
+
+            pane.getChildren().add(sphere2);
+            
+            rotate2.setNode(sphere2);
+            rotate2.setPath(circle2);            
+            rotate2.setDuration(Duration.seconds(0.3));              
+            rotate2.setCycleCount(Timeline.INDEFINITE);
+            rotate2.setInterpolator(Interpolator.LINEAR);   
+            rotate2.play();
+
+            Sphere sphere3 = new Sphere(12.5);
+            sphere3.setMaterial(material); 
+
+            Circle circle3 = new Circle(3.6);
+            circle3.setCenterX(-4.68);
+            circle3.setCenterY(-8);
+                  
+            PathTransition rotate3 = new PathTransition();
+
+            pane.getChildren().add(sphere3);
+            
+            rotate3.setNode(sphere3);
+            rotate3.setPath(circle3);
+            rotate3.setDuration(Duration.seconds(0.3));  
+            rotate3.setCycleCount(Timeline.INDEFINITE);
+            rotate3.setInterpolator(Interpolator.LINEAR);   
+            rotate3.play();
+         }
+      }
+
+      System.out.println("added " + i + " " + j + " pMass = " + pMass);
    } 
 
-   public static void main(String args[])
-   { 
-      launch(args); 
+   void explode(Color color, StackPane basePane, int cMass)
+   {
+      StackPane pane = new StackPane();
+      // basePane.getChildren().clear();
+      //StackPane pane = new StackPane();
+      basePane.getChildren().add(pane);
+      PhongMaterial material = new PhongMaterial();
+      material.setDiffuseColor(color);
+      // material.setSpecularColor(color);
+      ArrayList<Sphere> list = new ArrayList<Sphere>();
+      ParallelTransition ex;
+      
+      if(cMass == 1)
+      {
+         Sphere rSphere = new Sphere(12.5);
+         Sphere dSphere = new Sphere(12.5);
+         list.add(rSphere); 
+         list.add(dSphere);
+         rSphere.setMaterial(material);
+         dSphere.setMaterial(material);
+
+         pane.getChildren().add(rSphere);
+         pane.getChildren().add(dSphere);
+
+         TranslateTransition rightTranslate = new TranslateTransition(); 
+          
+         rightTranslate.setNode(rSphere); 
+         rightTranslate.setByX(50); 
+         rightTranslate.setDuration(Duration.millis(200));
+         rightTranslate.setCycleCount(1); 
+         rightTranslate.setAutoReverse(false);
+         rightTranslate.setInterpolator(Interpolator.LINEAR); 
+         // rightTranslate.play();
+
+         TranslateTransition downTranslate = new TranslateTransition(); 
+          
+         downTranslate.setNode(dSphere); 
+         downTranslate.setByY(50); 
+         downTranslate.setDuration(Duration.millis(200));
+         downTranslate.setCycleCount(1); 
+         downTranslate.setAutoReverse(false);
+         downTranslate.setInterpolator(Interpolator.LINEAR); 
+         // downTranslate.play();
+
+         ex = new ParallelTransition(rightTranslate, downTranslate);
+         ex.play();
+      }
+
+      else if(cMass >= 2)
+      {
+         Sphere lSphere = new Sphere(12.5);
+         Sphere rSphere = new Sphere(12.5);
+         Sphere dSphere = new Sphere(12.5);
+         list.add(rSphere); 
+         list.add(dSphere);
+         list.add(lSphere);
+         lSphere.setMaterial(material);
+         rSphere.setMaterial(material);
+         dSphere.setMaterial(material);
+
+         pane.getChildren().add(rSphere);
+         pane.getChildren().add(dSphere);
+         pane.getChildren().add(lSphere);
+
+         TranslateTransition rightTranslate = new TranslateTransition(); 
+          
+         rightTranslate.setNode(rSphere); 
+         rightTranslate.setByX(50); 
+         rightTranslate.setDuration(Duration.millis(200));
+         rightTranslate.setCycleCount(1); 
+         rightTranslate.setAutoReverse(false);
+         rightTranslate.setInterpolator(Interpolator.LINEAR); 
+         // rightTranslate.play();
+
+         TranslateTransition downTranslate = new TranslateTransition(); 
+          
+         downTranslate.setNode(dSphere); 
+         downTranslate.setByY(50); 
+         downTranslate.setDuration(Duration.millis(200));
+         downTranslate.setCycleCount(1); 
+         downTranslate.setAutoReverse(false);
+         downTranslate.setInterpolator(Interpolator.LINEAR); 
+         // downTranslate.play();   
+
+         TranslateTransition leftTranslate = new TranslateTransition(); 
+         
+         leftTranslate.setNode(dSphere); 
+         leftTranslate.setByX(-50); 
+         leftTranslate.setDuration(Duration.millis(200));
+         leftTranslate.setCycleCount(1); 
+         leftTranslate.setAutoReverse(false);
+         leftTranslate.setInterpolator(Interpolator.LINEAR); 
+         // leftTranslate.play();
+
+         ex = new ParallelTransition(rightTranslate, downTranslate, leftTranslate);
+         ex.play();
+      }
+
+      else
+      {
+         Sphere lSphere = new Sphere(12.5);
+         Sphere rSphere = new Sphere(12.5);
+         Sphere dSphere = new Sphere(12.5);
+         Sphere uSphere = new Sphere(12.5);
+         list.add(rSphere); 
+         list.add(dSphere);
+         list.add(lSphere);
+         list.add(uSphere);
+         lSphere.setMaterial(material);
+         rSphere.setMaterial(material);
+         dSphere.setMaterial(material);
+         uSphere.setMaterial(material);
+
+         pane.getChildren().add(rSphere);
+         pane.getChildren().add(dSphere);
+         pane.getChildren().add(lSphere);
+         pane.getChildren().add(uSphere);
+
+         TranslateTransition rightTranslate = new TranslateTransition(); 
+          
+         rightTranslate.setNode(rSphere); 
+         rightTranslate.setByX(50); 
+         rightTranslate.setDuration(Duration.millis(200));
+         rightTranslate.setCycleCount(1); 
+         rightTranslate.setAutoReverse(false);
+         rightTranslate.setInterpolator(Interpolator.LINEAR); 
+         rightTranslate.play();
+
+         TranslateTransition downTranslate = new TranslateTransition(); 
+          
+         downTranslate.setNode(dSphere); 
+         downTranslate.setByY(50); 
+         downTranslate.setDuration(Duration.millis(200));
+         downTranslate.setCycleCount(1); 
+         downTranslate.setAutoReverse(false);
+         downTranslate.setInterpolator(Interpolator.LINEAR); 
+         // downTranslate.play();   
+
+         TranslateTransition leftTranslate = new TranslateTransition(); 
+         
+         leftTranslate.setNode(lSphere); 
+         leftTranslate.setByX(-50); 
+         leftTranslate.setDuration(Duration.millis(200));
+         leftTranslate.setCycleCount(1); 
+         leftTranslate.setAutoReverse(false);
+         leftTranslate.setInterpolator(Interpolator.LINEAR); 
+         // leftTranslate.play();
+
+         TranslateTransition upTranslate = new TranslateTransition(); 
+         
+         upTranslate.setNode(uSphere); 
+         upTranslate.setByY(-50); 
+         upTranslate.setDuration(Duration.millis(200));
+         upTranslate.setCycleCount(1); 
+         upTranslate.setAutoReverse(false);
+         upTranslate.setInterpolator(Interpolator.LINEAR); 
+         // upTranslate.play();
+
+         ex = new ParallelTransition(rightTranslate, downTranslate, leftTranslate, upTranslate);
+         ex.play();
+      }
+
+      // PauseTransition delay = new PauseTransition(Duration.millis(200));
+      // delay.setOnFinished( e -> basePane.getChildren().remove(pane) );
+      // delay.play();
+
+      ex.setOnFinished(new EventHandler<ActionEvent>() {
+         @Override
+         public void handle(ActionEvent e)
+         {
+            basePane.getChildren().remove(pane);
+            notify();
+         }
+      });
    }
 
-   void explode(StackPane pane)
+   static void fade(ArrayList<Sphere> list)
    {
-      pane.getChildren().clear();
-      Sphere sphere1 = new Sphere(50);
-      Sphere sphere2 = new Sphere(50);
-      pane.getChildren().add(sphere1);
-      pane.getChildren().add(sphere2);
+      PhongMaterial material = new PhongMaterial();
+      material.setDiffuseColor(Color.TRANSPARENT);
 
-      TranslateTransition translateTransition1 = new TranslateTransition(); 
-       
-      translateTransition1.setNode(sphere1); 
-      translateTransition1.setByX(150); 
-      translateTransition1.setDuration(Duration.millis(200));
-      translateTransition1.setCycleCount(1); 
-      translateTransition1.setAutoReverse(false);
-      translateTransition1.setInterpolator(Interpolator.LINEAR); 
-      translateTransition1.play();
-
-      TranslateTransition translateTransition2 = new TranslateTransition(); 
-       
-      translateTransition2.setNode(sphere2); 
-      translateTransition2.setByY(150); 
-      translateTransition2.setDuration(Duration.millis(200));
-      translateTransition2.setCycleCount(1); 
-      translateTransition2.setAutoReverse(false);
-      translateTransition2.setInterpolator(Interpolator.LINEAR); 
-      translateTransition2.play();
-
-      PauseTransition delay = new PauseTransition(Duration.millis(200));
-      delay.setOnFinished( e -> pane.getChildren().clear() );
-      delay.play();
-   } 
+      for(int i=0; i<list.size(); i++)
+      {
+         list.get(i).setMaterial(material);
+      }
+   }
 }

@@ -9,8 +9,10 @@
 * @since   2017-11-16
 */
 
+import java.io.*;
 
-public final class Dimension
+
+public final class Dimension implements Serializable
 {
 	/**
      * To determine the row of a cell in the grid

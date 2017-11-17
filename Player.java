@@ -6,11 +6,13 @@ import javafx.stage.Stage;
 import javafx.scene.shape.Circle; 
 import javafx.scene.text.Font; 
 import javafx.scene.text.Text; 
+import java.io.*;
 
-public class Player
+public class Player implements Serializable
 {
-	private Color pColor;
+	private transient Color pColor;
 	private String name;
+	private String colName;
 
 	/**
      * Sets up a player with given name and color.
@@ -21,7 +23,15 @@ public class Player
 	public Player(String n, Color c)
 	{
 		this.pColor = c;
-		this.name = n;		
+		this.name = n;
+		this.colName = pColor.toString();		
+	}
+
+	public Player(String n, String c)
+	{
+		this.colName = c;
+		this.pColor = Color.valueOf(c);
+		this.name = n;
 	}
 
 	/**
@@ -31,6 +41,11 @@ public class Player
 	public Color getColor()
 	{
 		return this.pColor;
+	}
+
+	public String getColorString()
+	{
+		return colName;
 	}
 	
 	/**

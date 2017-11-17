@@ -1,14 +1,3 @@
-/**
-* <h1>Class Dimension</h1>
-* The Dimension class determines the dimension of the gamePage in terms of its rows and columns
-* <p>
-* <b>Note:</b> ......
-*
-* @author  Pulkit Madaan , Gyanesh Anand
-* @version 1.0
-* @since   2017-11-16
-*/
-
 import javafx.application.Application; 
 import javafx.collections.ObservableList; 
 import javafx.geometry.Orientation; 
@@ -23,18 +12,21 @@ import javafx.scene.control.*;
 import javafx.event.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.*;
+import java.util.*;
+import java.io.*;
 
 public class homePage extends Application 
 { 
-   /**
-     * Takes the input a stage and opens the game interface
-     * Further more , it opens a new gamePage when clicked new
-     * Or else resumes the previous game when clicked Resume
-     * @param stage the same stage across entire package
-     */
+   settingsPage settings;
+   ArrayList<Player> players;
+
    @Override 
    public void start(Stage stage) 
-   {    
+   {   
+      // System.out.println(2 % 2);
+      settings = new settingsPage();
+      players = new ArrayList<Player>();
+
       VBox vBox1 = new VBox();
 
       vBox1.setSpacing(20);
@@ -43,13 +35,13 @@ public class homePage extends Application
       vBox1.setAlignment(Pos.CENTER);
 
       Label winLabel = new Label("CHAIN REACTION");
-      winLabel.setFont(new Font((double) 50.0));
+      winLabel.setFont(new Font(50.0));
       vBox1.getChildren().add(winLabel);
 
       Label dropLabel = new Label("Select the number of Players");
       vBox1.getChildren().add(dropLabel);
 
-      ChoiceBox numPlayerChoice = new ChoiceBox();
+      ChoiceBox<String> numPlayerChoice = new ChoiceBox<String>();
       numPlayerChoice.getItems().addAll("2 Players", "3 Players", "4 Players", "5 Players", "6 Players", "7 Players", "8 Players");
       numPlayerChoice.getSelectionModel().select(0);
       vBox1.getChildren().add(numPlayerChoice);
@@ -94,7 +86,7 @@ public class homePage extends Application
       hBox2.getChildren().add(toggleSound);
 
       Button settingsBut = new Button("SETTINGS");
-      settingsBut.setOnAction(e -> new settingsPage().openSettings(stage));
+      settingsBut.setOnAction(e -> settings.openSettings(stage));
       hBox2.getChildren().add(settingsBut);
 
       vBox1.getChildren().add(hBox2);
@@ -111,14 +103,24 @@ public class homePage extends Application
          @Override
          public void handle(MouseEvent e)
          {
+            int k = Integer.parseInt(numPlayerChoice.getSelectionModel().getSelectedItem().substring(0,1));
+            System.out.println(k);
+
+            for(int i=0; i<k; i++)
+            {
+               
+               System.out.println("home " + settings.getPlayer(i));
+               players.add(settings.getPlayer(i));
+            }
+
             if(gridOption1.isSelected())
             {
-               new gamePage().openGame(stage, new Dimension(9, 6));   
+               new gamePage().openGame(stage, new Dimension(9, 6), players);   
             }
 
             else
             {
-               new gamePage().openGame(stage, new Dimension(15, 10));
+               new gamePage().openGame(stage, new Dimension(15, 10), players);
             }
             
          }
@@ -127,10 +129,6 @@ public class homePage extends Application
       newGameBut.addEventFilter(MouseEvent.MOUSE_CLICKED, gameHandler);
    } 
 
-   /**
-     * Launches the game interface
-     * @param args String Argument
-     */
    public static void main(String args[])
    { 
       launch(args); 

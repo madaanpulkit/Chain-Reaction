@@ -7,44 +7,37 @@ import javafx.scene.shape.Circle;
 import javafx.scene.text.Font; 
 import javafx.scene.text.Text; 
 
-public class Orbs
-{
-	/**
-     * Color of the orb
-     */
-	private Color oColor;
-	/**
-     * no. of balls in the or
-     */
-	private int no_balls;
+//this should be a generic class for all three type of orbs
 
-	/**
-     * Constructs an orb with given number of balls
-     * and color.
-     * @param      c Color of the orb to be set up
-     * @param      n no. of balls in the orb
-     */
+class Orbs
+{
+
+	private Color oColor;
+	private int no_balls;
+	//private animation ani;
+
 	public Orbs(Color c,int n)
 	{
 		this.oColor = c;
 		this.no_balls = n;
+		//this.ani = a;
 	}
-
-	/**
-     * returns the color of the orb
-     * @return     the color of the orb
-     */
 	public Color getOrbColor()
 	{
 		return this.oColor;
 	}
-
-	/**
-     * Sets up the color of the current orb
-     * @param      c the color of the current orb
-     */
+	/*public animation getAnimation()
+	{
+		return this.ani;
+	}*/
 	public void setColor(Color c)
 	{
 		this.oColor=c;
 	}
+	/*public void setAnimation(animation a)
+	{
+		this.ani=a;
+	}*/
+
+
 }

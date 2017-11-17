@@ -15,14 +15,11 @@ import java.io.*;
 import java.util.*;
 import javafx.scene.paint.*;
 
-public class settingsPage
+class settingsPage
 {
    private ArrayList<Player> playerList;
    private ArrayList<Color> colorList;
 
-   /**
-     * Sets up the settings Page
-     */
    settingsPage()
    {
       playerList = new ArrayList<Player>();
@@ -39,40 +36,23 @@ public class settingsPage
       }
    }
 
-   /**
-     * Returns the object of a player.
-     * @param      i i is the location of the player present at location i in the playerlist
-     * @return     the Player present at location i in the playerlist
-     */
    public Player getPlayer(int i)
    {
       return playerList.get(i);
    }
 
-   /**
-     * openSettings function contains the settings for each and every player.
-     * It has dropdown menu for each and every player from where the player can choose his color.
-     * It also contains the field for entering the name of every player.
-     * @param      stage It provides the stage for the game page.
-     */
+
    public void openSettings(Stage stage)
    {
-      /**
-     * Sets up the Vertical Box of the settings Page with all its specifiations
-     */
       VBox vBox1 = new VBox();
       vBox1.setSpacing(20);
       vBox1.setPadding(new Insets(20, 20, 20, 20));
       vBox1.setAlignment(Pos.CENTER);
-      /**
-     * Label showing the text Settings
-     */
-      Label headLabel = new Label("SETTINGS"); //
+
+      Label headLabel = new Label("SETTINGS");
       headLabel.setFont(new Font(50.0));
       vBox1.getChildren().add(headLabel);
-      /**
-     * Hbox contains the name and color choice of the player
-     */
+
       HBox[] hBox = new HBox[8];
       Label[] pLabel = new Label[8];
       ChoiceBox[] pBox = new ChoiceBox[8];
@@ -93,9 +73,7 @@ public class settingsPage
 
          vBox1.getChildren().add(hBox[i]);
       }
-      /**
-     * Button to go back to Home page
-     */
+
       Button backBut = new Button("BACK");
       vBox1.getChildren().add(backBut);
 
