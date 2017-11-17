@@ -15,6 +15,13 @@ import javafx.scene.paint.*;
 
 public class winnerPage
 { 
+   homePage home;
+
+   winnerPage()
+   {
+      home = new homePage();
+   }
+
    public void openWinnerPage(Stage stage , Player p) 
    {  
       VBox vBox = new VBox();
@@ -22,40 +29,21 @@ public class winnerPage
       vBox.setPadding(new Insets(20, 20, 20, 20));
       vBox.setAlignment(Pos.CENTER);
 
-      String winnerName = "p.getName()";
+      String winnerName = p.getName() + " is Winner ";
 
       Label winLabel = new Label(winnerName);
-      winLabel.setFont(new Font((double) 50.0));
+      winLabel.setFont(new Font(50.0));
       vBox.getChildren().add(winLabel);
 
       Button startNewBut = new Button("START NEW GAME");
+      startNewBut.setOnAction(e -> home.start(stage));
       vBox.getChildren().add(startNewBut);
 
-      Button exitGameBut = new Button("EXIT GAME");
-      vBox.getChildren().add(exitGameBut);
+      Button undoBut = new Button("UNDO");
+      vBox.getChildren().add(undoBut);
 
-      //vBox1.getChildren().add(hBox1);     
-      Scene scene = new Scene(vBox);       
-      stage.setTitle("Chain Reaction");       
-      stage.setScene(scene);       
-      stage.show();
-      EventHandler<MouseEvent> gameHandler = new EventHandler<MouseEvent>(){
-         @Override
-         public void handle(MouseEvent e)
-         {
-            /*if(gridOption1.isSelected())
-            {
-               new gamePage().openGame(stage, new Dimension(9, 6));   
-            }
-
-            else
-            {
-               new gamePage().openGame(stage, new Dimension(15, 10));
-            }
-            */
-         }
-      };
-
-      //newGameBut.addEventFilter(MouseEvent.MOUSE_CLICKED, gameHandler);
+      Scene scene = new Scene(vBox);    
+      stage.setTitle("Chain Reaction"); 
+      stage.setScene(scene);
    } 
 }
