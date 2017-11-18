@@ -1,3 +1,14 @@
+/**
+* <h1>Class Dimension</h1>
+* The Dimension class determines the dimension of the gamePage in terms of its rows and columns
+* <p>
+* <b>Note:</b> ......
+*
+* @author  Pulkit Madaan , Gyanesh Anand
+* @version 1.0
+* @since   2017-11-16
+*/
+
 import javafx.event.*;
 import javafx.scene.input.*;
 import javafx.scene.control.*;
@@ -15,13 +26,21 @@ public class resumeHandler implements EventHandler<ActionEvent>
 	private animation anima;
 	private Dimension dimension;
 
-	resumeHandler(Stage stage, String name)
+	/**
+	     * Constructs a reset event to Undo the game
+	     * @param      stage stage to set scene
+	     * @param      name name of the file
+	     */
+	public resumeHandler(Stage stage, String name)
 	{
 		this.stage = stage;
 		fileName = name;
 		game = new gamePage();
 	}
-
+		/**
+	     * Handles the Reset Event
+	     * @param      reset listens to reset event
+	     */
 	@Override
 	public void handle(ActionEvent resume)
 	{
