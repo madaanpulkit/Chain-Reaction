@@ -1,3 +1,14 @@
+/**
+* <h1>Class Dimension</h1>
+* The Dimension class determines the dimension of the gamePage in terms of its rows and columns
+* <p>
+* <b>Note:</b> ......
+*
+* @author  Pulkit Madaan , Gyanesh Anand
+* @version 1.0
+* @since   2017-11-16
+*/
+
 import javafx.application.Application; 
 import javafx.collections.ObservableList; 
 import javafx.geometry.Orientation; 
@@ -17,34 +28,21 @@ import java.io.*;
 
 public class homePage extends Application 
 { 
+      /**
+        * The Setttings of current game
+        */
    settingsPage settings;
+      /**
+        * The players playing the game
+        */
    ArrayList<Player> players;
 
-/*   homePage(Stage stage)
-   {
-      for(int i=0; i<8; i++)
-      {
-         players.add(settingsPage.getPlayer(i));
-      }
-   }*/
-
-/*   homePage()
-   {
-      settings = new settingsPage();
-      players = new ArrayList<Player>();
-      ArrayList<Color> colorList = new ArrayList<Color>(Arrays.asList(Color.RED, Color.YELLOW, Color.GREEN, Color.BLUE, Color.BROWN, Color.WHITE, Color.GREY, Color.PINK));
-
-      for(int i=0; i<8; i++)
-      {
-         players.add(new Player("Player " + Integer.toString(i+1), colorList.get(i)));
-      }
-
-      for(int i=0; i<players.size(); i++)
-      {
-         System.out.println("Settings " + players.get(i));
-      }
-   }*/
-
+   /**
+        * Takes the input a stage and opens the game interface
+        * Further more , it opens a new gamePage when clicked new
+        * Or else resumes the previous game when clicked Resume
+        * @param stage the same stage across entire package
+        */
    @Override
    public void start(Stage stage)
    {
@@ -63,13 +61,24 @@ public class homePage extends Application
 
       page(stage);
    }
-
+   /**
+        * Takes the input a stage and opens the game interface
+        * Further more , it opens a new gamePage when clicked new
+        * Or else resumes the previous game when clicked Resume
+        * @param stage the same stage across entire package
+        * @param players Arraylist of players
+        */
    public void start(Stage stage, ArrayList<Player> players)
    {
       this.players = players;
       page(stage);
    }
-
+   /**
+        * Takes the input a stage and opens the game interface
+        * Further more , it opens a new gamePage when clicked new
+        * Or else resumes the previous game when clicked Resume
+        * @param stage the same stage across entire package
+        */
    public void page(Stage stage) 
    {   
       // System.out.println(2 % 2);
@@ -186,7 +195,10 @@ public class homePage extends Application
 
       newGameBut.addEventFilter(MouseEvent.MOUSE_CLICKED, gameHandler);
    } 
-
+   /**
+        * Launches the game interface
+        * @param args String Argument
+        */
    public static void main(String args[])
    { 
       // new homepage();
