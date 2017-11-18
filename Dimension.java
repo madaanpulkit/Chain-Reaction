@@ -28,7 +28,7 @@ public final class Dimension implements Serializable
      * @param      r To determine the row of a cell in the grid
      * @param      c To determine the column of a cell in the grid
      */
-	Dimension(int r, int c)
+	public Dimension(int r, int c)
 	{
 		row = r;
 		column = c;

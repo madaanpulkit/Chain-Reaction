@@ -56,6 +56,8 @@ public class resumeHandler implements EventHandler<ActionEvent>
 			e.printStackTrace();
 		}
 
+		System.out.println(oldGame);
+		
 		dimension = oldGame.getDimension();
 
 		game.openGame(stage, dimension, oldGame.getOPlayers());

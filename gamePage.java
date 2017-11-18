@@ -1,3 +1,15 @@
+/**
+* <h1>Class Coordinate</h1>
+* The Coordinate class determines the coordinates of a cll in terms of its rows and columns.
+* <p>
+* <b>Note:</b> ......
+*
+* @author  Pulkit Madaan , Gyanesh Anand
+* @version 1.0
+* @since   2017-11-16
+*/
+
+
 import javafx.application.Application; 
 import javafx.collections.ObservableList; 
 import javafx.geometry.Orientation; 
@@ -20,7 +32,7 @@ import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.text.*;
 
-class gamePage implements Serializable
+public class gamePage implements Serializable
 {
   private ArrayList<Player> players;
   private Cell[][] cells;
@@ -40,7 +52,10 @@ class gamePage implements Serializable
   private boolean isWinner;
   private ArrayList<Player> oPlayers;
 
-  gamePage()
+    /**
+       * Constructs the gamePage of the game
+       */
+  public gamePage()
   {
     players = new ArrayList<Player>();
     count = 0;
@@ -52,7 +67,13 @@ class gamePage implements Serializable
     isWinner = false;
 
   } 
-
+    /**
+       * Constructs the Cell with given critical mass and color
+       *
+       * @param      stage gamePage is set on this stage
+       * @param      dimension dimensions of the gamepage
+       * @param       list of players playing the game
+       */
   public void openGame(Stage stage, Dimension dimension, ArrayList<Player> oPlayers)
   {
     File directory = new File("SavedGames");
@@ -195,8 +216,10 @@ class gamePage implements Serializable
     stage.setScene(scene); 
     reStart.setOnAction(new resetEvent(this, cells, Plabel, dimension.getRow(), dimension.getColumn(), players.get(0)));
   }
-
-  void nextPlayer()
+  /**
+     * Handles the turn of next player in the game
+     */
+  public void nextPlayer()
   {
     // oldIndex = curIndex;
     curIndex = (curIndex + 1) % players.size();
@@ -272,7 +295,9 @@ class gamePage implements Serializable
       }
     }
   }*/
-
+  /**
+     * Handles the moves of current player in the game
+     */
   private void move(int k, int l, int column, int row)
   {
     /*for(int i=0; i<column; i++)
@@ -367,7 +392,9 @@ class gamePage implements Serializable
       }
     }
   }
-
+  /**
+     * Handles the game completion event
+     */
   private boolean gameComplete()
   {
     if(count <= limit)
@@ -393,7 +420,9 @@ class gamePage implements Serializable
   
     return true;
   }
-
+  /**
+     * Serilasies the game 
+     */
   public void serialize() throws IOException
   {
     ObjectOutputStream out = null;  
@@ -409,7 +438,11 @@ class gamePage implements Serializable
       out.close();  
     } 
   }
-
+  /**
+     * Deserilaises the game
+     * @param name of the game to be deserialized
+     * @return returns the instance of game deserialized
+     */
   public gamePage deserialize(String name) throws IOException, ClassNotFoundException
   {
     ObjectInputStream in = null;  
@@ -427,88 +460,144 @@ class gamePage implements Serializable
       return page;
     }
   }
-
+  /**
+     * Returns the start time of the event
+     * 
+     * @return Returns the start time of the event
+     */
   public String getStartTime()
   {
     return startTime;
   }
-
+  /**
+     * sets the start time of the event
+     * 
+     * @param  the start time of the event
+     */
   public void setStartTime(String s)
   {
     startTime = s;
   }
-
+  /**
+     * Returns animation of the event
+     * 
+     * @return Returns the animationof the event
+     */
   public animation getAnimation()
   {
     return anima;
   }  
-
+  /**
+     * Returns the current player in the game
+     * 
+     * @return the current player in the game
+     */
   public Player getCurPlayer()
   {
     return curPlayer;
   }
-
+   /**
+     * Sets the current player in the game
+     * 
+     * @param the current player in the game
+     */
   public void setCurPlayer(Player p)
   {
     curPlayer = p;
   }
-
+   /**
+     * Returns the cells of the game
+     * 
+     * @return cells of the game
+     */
   public Cell[][] getCells()
   {
-    // System.out.println("game + resume + " + cells);
     return cells;
   }
-
+  /**
+     * Returns the dimensions
+     * 
+     * @param Dimension the dimensions
+     */
   public Dimension getDimension()
   {
     return dimension;
   }
-
+  /**
+     * Returns the label of the cell
+     * 
+     * @return the label of current cell
+     */
   public Label[][] getPLabel()
   {
     return Plabel;
   }
-
+  /**
+     * Returns the Arraylist of players
+     * 
+     * @return the Arraylist of players
+     */
   public ArrayList<Player> getPlayers()
   {
     return players;
   }
-
-  // public void setPlayers(ArrayList<Player> p)
-  // {
-  //   players = p;
-  // }
-
+  /**
+     * Returns the currrent index
+     * 
+     * @param val current index
+     */
   public int getCurIndex()
   {
     return curIndex;
   }
-
+  /**
+     * Returns the number of moves
+     * 
+     * @return  NUMBER OF moves
+     */
   public int getCount()
   {
     return count;
   }
-
+  /**
+     * Sets the currrent index
+     * 
+     * @param val current index
+     */
   public void setCurIndex(int val)
   {
     curIndex = val;
   }
-
+  /**
+     * Sets the number of moves
+     * 
+     * @param val NUMBER OF moves
+     */
   public void setCount(int val)
   {
     count = val;
   }
-
+  /**
+     * Sets the winner of the game
+     * 
+     * @param b detemines whether the player is winner
+     */
   public void setWinner(boolean b)
   {
     isWinner = b;
   }
-
+  /**
+     * Removes all the players of current game
+     */
   public void removePlayers()
   {
     players.clear();
   }
-
+  /**
+     * Returns the Arraylist of players
+     * 
+     * @return the Arraylist of players
+     */
   public ArrayList<Player> getOPlayers()
   {
     return oPlayers;

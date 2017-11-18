@@ -1,3 +1,14 @@
+/**
+* <h1>Class Dimension</h1>
+* The Dimension class determines the dimension of the gamePage in terms of its rows and columns
+* <p>
+* <b>Note:</b> ......
+*
+* @author  Pulkit Madaan , Gyanesh Anand
+* @version 1.0
+* @since   2017-11-16
+*/
+
 import javafx.application.Application; 
 import javafx.collections.ObservableList; 
 import javafx.geometry.Orientation; 
@@ -15,13 +26,25 @@ import javafx.scene.paint.*;
 
 public class winnerPage
 { 
+   /**
+     * An object of homePage which is opened
+     */
    homePage home;
-
+   /**
+     * Creates an object of homeClass which is opened when 
+     * clicked new game on the winnerPage
+     */
    winnerPage()
    {
       home = new homePage();
    }
-
+   /**
+     * Takes the input a stage and a player declares it as winner
+     * Further more , it opens a new homePage when clicked new
+     * Or else exits the game when clicked EXIT
+     * @param stage the same stage across entire package
+     * @param p the player who has won the match
+     */
    public void openWinnerPage(Stage stage , Player p, gamePage game) 
    {  
       VBox vBox = new VBox();

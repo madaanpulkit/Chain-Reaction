@@ -25,6 +25,17 @@ import java.io.*;
 
 public class animation
 { 
+   /**
+     * Constructs an orb with given number of balls
+     * and color.
+     * @param      color Color of the orb to be set up
+     * @param      pane StackPne to which animation is to be added
+     * @param      cMass critical mass of the cell
+     * @param      pMass present mass of the cell
+     * @param      i x coordinate of the cell
+     * @param      j y coordinate of the cell
+     *
+     */
    public void add(Color color, StackPane pane, int cMass, int pMass, int i, int j) 
    {    
       // StackPane pane = cell.getOrbPane();
@@ -224,8 +235,15 @@ public class animation
 
       System.out.println("added " + i + " " + j + " pMass = " + pMass);
    } 
-
-   void explode(Color color, StackPane basePane, int cMass)
+   /**
+     * Explodes an orb with given number of balls
+     * and color.
+     * @param      color Color of the orb to be set up
+     * @param      pane StackPne to which animation is to be added
+     * @param      cMass critical mass of the cell
+     *
+     */
+   public void explode(Color color, StackPane basePane, int cMass)
    {
       StackPane pane = new StackPane();
       // basePane.getChildren().clear();
@@ -400,8 +418,13 @@ public class animation
          }
       });
    }
-
-   static void fade(ArrayList<Sphere> list)
+   /**
+     * Constructs an orb with given number of balls
+     * and color.
+     * @param      list list on which is to be faded
+     *
+     */
+   public static void fade(ArrayList<Sphere> list)
    {
       PhongMaterial material = new PhongMaterial();
       material.setDiffuseColor(Color.TRANSPARENT);

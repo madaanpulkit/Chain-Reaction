@@ -1,3 +1,14 @@
+/**
+* <h1>Class Dimension</h1>
+* The Dimension class determines the dimension of the gamePage in terms of its rows and columns
+* <p>
+* <b>Note:</b> ......
+*
+* @author  Pulkit Madaan , Gyanesh Anand
+* @version 1.0
+* @since   2017-11-16
+*/
+
 import javafx.application.Application; 
 import javafx.scene.Group; 
 import javafx.scene.Scene; 
@@ -57,7 +68,12 @@ public class Cell implements Serializable
 		curPlayer = null;
 		sPane.getChildren().add(orbPane);
 	}
-	//
+		/**
+	     * Constructs the Cell with given critical mass and present Mass
+	     *
+	     * @param      cMass Critical mass of the cell to be set up
+	     * @param      pMass Present mass of the cell to be set up
+	     */
 	public Cell(int cMass, int pMass)
 	{
 		this.cMass = cMass;

@@ -1,10 +1,21 @@
+/**
+* <h1>Class Dimension</h1>
+* The Dimension class determines the dimension of the gamePage in terms of its rows and columns
+* <p>
+* <b>Note:</b> ......
+*
+* @author  Pulkit Madaan , Gyanesh Anand
+* @version 1.0
+* @since   2017-11-16
+*/
+
 import javafx.event.*;
 import javafx.scene.input.*;
 import javafx.scene.control.*;
 import javafx.scene.paint.*;
 import java.io.*;
 
-class undoHandler implements EventHandler<ActionEvent>
+public class undoHandler implements EventHandler<ActionEvent>
 {
 	private Cell[][] cells;
 	private Label[][] Plabel;
@@ -15,7 +26,10 @@ class undoHandler implements EventHandler<ActionEvent>
 	// Player newPlayer;
 	private animation anima;
 	private Dimension dimension;
-
+	/**
+	     * Constructs a undo event to Undo the game
+	     * @param      game Game on which undo works
+	     */
 	undoHandler(gamePage game)
 	{ 
 		this.game = game;
@@ -24,7 +38,10 @@ class undoHandler implements EventHandler<ActionEvent>
 		Plabel = game.getPLabel();
 		dimension = game.getDimension();
 	}
-
+	/**
+	     * Handles the Undo Event
+	     * @param      reset listens to reset event
+	     */
 	@Override
 	public void handle(ActionEvent reset)
 	{
