@@ -43,7 +43,7 @@ public class winnerPage
 
       vBox.getChildren().add(undoBut);
 
-      // undoBut.setOnAction(new undoHandler(game));
+      undoBut.setOnAction(new resumeHandler(stage, game.getStartTime() + ".ser"));
 
       Scene scene = new Scene(vBox);    
       stage.setTitle("Chain Reaction"); 
