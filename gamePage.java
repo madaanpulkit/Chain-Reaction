@@ -36,6 +36,9 @@ class gamePage implements Serializable
   private static winnerPage winner;
   private static Stage stage;
   private String startTime;
+  private int limit;
+  private boolean isWinner;
+  private ArrayList<Player> oPlayers;
 
   gamePage()
   {
@@ -46,17 +49,33 @@ class gamePage implements Serializable
     winner = new winnerPage();
     startTime = new SimpleDateFormat("dd-MM-yyyy-hh-mm-ss").format(new Date());
     curIndex = 0;
+    isWinner = false;
+
   } 
 
-  public void openGame(Stage stage, Dimension dimension, ArrayList<Player> players)
+  public void openGame(Stage stage, Dimension dimension, ArrayList<Player> oPlayers)
   {
     File directory = new File("SavedGames");
     directory.mkdirs();
     this.stage = stage;
     this.dimension = dimension;
-    this.players = players;
+    this.oPlayers = oPlayers;
     cells = new Cell[dimension.getColumn()][dimension.getRow()];
-    curPlayer = players.get(0);
+    curPlayer = oPlayers.get(0);
+    limit = oPlayers.size();
+
+    for(int i=0; i<oPlayers.size(); i++)
+    {
+        if(oPlayers.get(i).getColor() == null)
+        {
+          players.add(new Player(oPlayers.get(i).getName(), oPlayers.get(i).getColorString()));
+        }
+        
+        else
+        {
+          players.add(new Player(oPlayers.get(i).getName(), oPlayers.get(i).getColor()));
+        }
+    }
 
     /*    
     for(int i=0; i<players.size(); i++)
@@ -157,6 +176,7 @@ class gamePage implements Serializable
             }
 
             move(k, l, dimension.getColumn(), dimension.getRow());
+            System.out.println("k = " + k + "; l = " + l + " ; nextPlayer");
             nextPlayer();
             // System.out.println("Done");
 
@@ -171,6 +191,7 @@ class gamePage implements Serializable
     
     Scene scene = new Scene(vBox);    
     stage.setTitle("Chain Reaction"); 
+    // System.out.println("resume 1");
     stage.setScene(scene); 
     reStart.setOnAction(new resetEvent(this, cells, Plabel, dimension.getRow(), dimension.getColumn(), players.get(0)));
   }
@@ -180,6 +201,52 @@ class gamePage implements Serializable
     // oldIndex = curIndex;
     curIndex = (curIndex + 1) % players.size();
     curPlayer = players.get(curIndex);
+    Player selectPlayer = null;
+    int selectIndex = curIndex;
+    
+    
+    if(count > limit && !isWinner)
+    {  
+      boolean flag = false;
+
+      while(selectPlayer == null && !players.isEmpty())
+      {
+        selectPlayer = players.get(selectIndex);
+
+        for(int i=0; i<dimension.getColumn(); i++)
+        {
+          for(int j=0; j<dimension.getRow(); j++)
+          {
+            if(cells[i][j].getCurPlayer() == null)
+            {
+              continue;
+            }
+
+            else if(selectPlayer.equals(cells[i][j].getCurPlayer()))
+            {
+              flag = true;
+              break;
+            }
+          }
+
+          if(flag)
+          {
+            break;
+          }
+        }
+
+        if(flag)
+        {
+          break;
+        }
+
+        players.remove(selectIndex);
+        selectPlayer = null;
+      }
+
+      curIndex = selectIndex;
+      curPlayer = players.get(curIndex);
+    }
 
     for(int i=0; i<dimension.getColumn(); i++) 
     {
@@ -238,8 +305,10 @@ class gamePage implements Serializable
 
         if(gameComplete())
         {
-          System.out.println(curPlayer.getName() + " is Winner ");
+          System.out.println(curPlayer.getName() + " is Winner from add");
           winner.openWinnerPage(stage, curPlayer, this);
+          isWinner = true;
+          break;
         }
         
         continue;
@@ -248,7 +317,7 @@ class gamePage implements Serializable
 
       cells[i][j].getOrbPane().getChildren().clear();
       // anima.explode(curPlayer.getColor(), cells[i][j].getOrbPane(), cells[i][j].getCMass());
-/*      try
+      /*try
       {
         wait();
       }
@@ -291,15 +360,17 @@ class gamePage implements Serializable
 
       if(gameComplete())
       {
-        System.out.println(curPlayer.getName() + " is Winner ");
+        System.out.println(curPlayer.getName() + " is Winner from explode");
         winner.openWinnerPage(stage, curPlayer, this);
+        isWinner = true;
+        break;
       }
     }
   }
 
   private boolean gameComplete()
   {
-    if(count < players.size())
+    if(count <= limit)
     {
       return false;
     }
@@ -362,6 +433,11 @@ class gamePage implements Serializable
     return startTime;
   }
 
+  public void setStartTime(String s)
+  {
+    startTime = s;
+  }
+
   public animation getAnimation()
   {
     return anima;
@@ -379,6 +455,7 @@ class gamePage implements Serializable
 
   public Cell[][] getCells()
   {
+    // System.out.println("game + resume + " + cells);
     return cells;
   }
 
@@ -396,6 +473,11 @@ class gamePage implements Serializable
   {
     return players;
   }
+
+  // public void setPlayers(ArrayList<Player> p)
+  // {
+  //   players = p;
+  // }
 
   public int getCurIndex()
   {
@@ -415,6 +497,21 @@ class gamePage implements Serializable
   public void setCount(int val)
   {
     count = val;
+  }
+
+  public void setWinner(boolean b)
+  {
+    isWinner = b;
+  }
+
+  public void removePlayers()
+  {
+    players.clear();
+  }
+
+  public ArrayList<Player> getOPlayers()
+  {
+    return oPlayers;
   }
 
 }

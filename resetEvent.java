@@ -11,7 +11,6 @@ class resetEvent implements EventHandler<ActionEvent>
 	int row;
 	int column;
 	gamePage game;
-	// Player curPlayer;
 	Player newPlayer;
 
 	resetEvent(gamePage game, Cell[][] cells, Label[][] Plabel, int row, int column, Player newPlayer)
@@ -21,7 +20,6 @@ class resetEvent implements EventHandler<ActionEvent>
 		this.row = row;
 		this.column = column;
 		this.game = game;
-		// this.curPlayer = curPlayer;
 		this.newPlayer = newPlayer;
 	}
 
@@ -30,6 +28,15 @@ class resetEvent implements EventHandler<ActionEvent>
 	{
 		game.setCount(0);
 		game.setCurIndex(0);
+		game.setWinner(false);
+
+		game.removePlayers();
+
+		for(int i=0; i<game.getOPlayers().size(); i++)
+		{
+			game.getPlayers().add(game.getOPlayers().get(i));
+		}
+
 		for(int i=0; i<column; i++)
 	    {
 	      for(int j=0; j<row; j++)

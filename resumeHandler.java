@@ -3,42 +3,49 @@ import javafx.scene.input.*;
 import javafx.scene.control.*;
 import javafx.scene.paint.*;
 import java.io.*;
+import javafx.stage.Stage;
 
-class undoHandler implements EventHandler<ActionEvent>
+public class resumeHandler implements EventHandler<ActionEvent>
 {
+	private Stage stage;
+	private String fileName;
+	private gamePage game;
 	private Cell[][] cells;
 	private Label[][] Plabel;
-	// int row;
-	// int column;
-	private gamePage game;
-	// Player curPlayer;
-	// Player newPlayer;
 	private animation anima;
 	private Dimension dimension;
 
-	undoHandler(gamePage game)
-	{ 
-		this.game = game;
-		anima = game.getAnimation();
-		cells = game.getCells();
-		Plabel = game.getPLabel();
-		dimension = game.getDimension();
+	resumeHandler(Stage stage, String name)
+	{
+		this.stage = stage;
+		fileName = name;
+		game = new gamePage();
 	}
 
 	@Override
-	public void handle(ActionEvent reset)
+	public void handle(ActionEvent resume)
 	{
 		gamePage oldGame = null;
-		
+
 		try
 		{
-			oldGame = game.deserialize(game.getStartTime());
+			oldGame = game.deserialize(fileName.substring(0, fileName.length()-4));
 		}
 
 		catch(Exception e)
 		{
 			e.printStackTrace();
 		}
+
+		dimension = oldGame.getDimension();
+
+		game.openGame(stage, dimension, oldGame.getOPlayers());
+
+		cells = game.getCells();
+		anima = game.getAnimation();
+		Plabel = game.getPLabel();
+
+		game.setStartTime(oldGame.getStartTime());
 
 		game.setCurPlayer(new Player(oldGame.getCurPlayer().getName(), oldGame.getCurPlayer().getColorString()));
 
@@ -61,7 +68,6 @@ class undoHandler implements EventHandler<ActionEvent>
 				cells[i][j].setPMass(oldCells[i][j].getPMass());
 				Plabel[i][j].setText(Integer.toString(cells[i][j].getPMass()));
 				cells[i][j].setCellColor(Color.valueOf(oldGame.getCurPlayer().getColorString()));
-				// System.out.println(Plabel[i][j].getText());
 				if(oldCells[i][j].getCurPlayer() != null)
 				{
 					cells[i][j].setCurPlayer(new Player(oldCells[i][j].getCurPlayer().getName(), oldCells[i][j].getCurPlayer().getColorString()));
@@ -77,6 +83,7 @@ class undoHandler implements EventHandler<ActionEvent>
 				}
 			}
 		}
+
 
 	}
 }
