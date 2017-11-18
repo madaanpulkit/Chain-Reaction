@@ -194,6 +194,11 @@ public class homePage extends Application
       };
 
       newGameBut.addEventFilter(MouseEvent.MOUSE_CLICKED, gameHandler);
+      
+      String path = System.getProperty("user.dir");
+      String[] gameList = (new File(path + "/SavedGames")).list();
+      resumeBut.setOnAction(new resumeHandler(stage, gameList[gameList.length-1]));
+
    } 
    /**
         * Launches the game interface
